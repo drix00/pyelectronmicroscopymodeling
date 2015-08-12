@@ -1,0 +1,9 @@
+[2012/02/19]
+use argparse and ConfigParser for input.
+option to use xml file as input file (optional).
+no backward file compability until version 1.0.
+archive results in zip file.
+save results in csv file.
+save program state and results with pickle.
+save results in database (optional).
+
