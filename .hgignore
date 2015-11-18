@@ -3,3 +3,4 @@ dist/
 pyEMM.egg-info/
 *.pyc
 *.cfg
+.coverage
