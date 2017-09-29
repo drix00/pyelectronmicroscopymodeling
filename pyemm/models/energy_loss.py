@@ -17,8 +17,8 @@ import matplotlib.pyplot as plt
 import scipy.constants as constants
 
 # Local modules.
-import DatabasesTools.ElementProperties as ElementProperties
-import DatabasesTools.Casino3.SecondaryElectronData as SecondaryElectronData
+import pywinxraydata.ElementProperties as ElementProperties
+# import DatabasesTools.Casino3.SecondaryElectronData as SecondaryElectronData
 import pyHendrixDemersTools.Files as Files
 from pyHendrixDemersTools import Graphics
 
