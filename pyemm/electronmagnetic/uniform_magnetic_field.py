@@ -38,6 +38,11 @@ Y = 1
 Z = 2
 
 def compute_velocity_nm_s(electron_energy_keV):
+    """
+    .. todo:: Correct the implementation of this method with reference.
+    :param electron_energy_keV:
+    :return:
+    """
     energy_eV = electron_energy_keV * 1.0e3
     energy_Nm = energy_eV * 1.602189e-19
     velocity_m_s = np.sqrt(2.0*energy_Nm/m_e)
