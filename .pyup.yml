@@ -1,0 +1,13 @@
+update: all
+
+search: False
+
+requirements:
+  - requirements.txt:
+      # update all dependencies and pin them
+      update: all
+      pin: True
+
+label_prs: update
+
+assignees: drix00
