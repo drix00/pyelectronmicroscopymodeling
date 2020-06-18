@@ -17,10 +17,8 @@ import matplotlib.pyplot as plt
 import scipy.constants as constants
 
 # Local modules.
-import pywinxraydata.ElementProperties as ElementProperties
-# import DatabasesTools.Casino3.SecondaryElectronData as SecondaryElectronData
-import pyHendrixDemersTools.Files as Files
-from pyHendrixDemersTools import Graphics
+import pyemm.ElementProperties as ElementProperties
+from pyemm import get_current_module_path
 
 # Globals and constants variables.
 
@@ -78,30 +76,30 @@ def dEdsBetheRelativiste_eV_nm(atomicNumber, energy_eV):
 
     return dEds_eV_nm
 
-def dEdsJoyLuoMonsel_eV_nm(atomicNumber, energy_eV):
-    configurationFilepath = Files.getCurrentModulePath(__file__, "../EnergyLossTools.cfg")
-    filepath = Files.getDataPath(configurationFilepath, os.path.join("Casino3", "int", "numlist.dat"))
-    seData = SecondaryElectronData.SecondaryElectronData(filepath)
-
-    J_eV = ElementProperties.getMeanIonizationEnergy_eV(atomicNumber)
-    workFunction_eV = seData.getWorkFunction_eV(atomicNumber)
-    k = ElementProperties.getKRatioCorrectionMonsel(atomicNumber, workFunction_eV*1.0e-3)
-    Z_A = atomicNumber/ElementProperties.getAtomicMass_g_mol(atomicNumber)
-
-    rho_g_cm3 = ElementProperties.getMassDensity_g_cm3(atomicNumber)
-
-    B = np.log(1.166 * (energy_eV + k*J_eV)/J_eV) * Z_A
-
-    dEds_eV_nm = -7.85 * rho_g_cm3 * B / (energy_eV*1.0e-3)
-
-    if energy_eV*1.0e-3 < (workFunction_eV*1.0e-3 + 1.0 - 10.0):
-        dEds_eV_nm = 0.0
-
-    if dEds_eV_nm > 0.0:
-        dEds_eV_nm = 0.0
-
-    residualEnergyLoss_eV = 0.0004e-3
-    return dEds_eV_nm - residualEnergyLoss_eV
+# def dEdsJoyLuoMonsel_eV_nm(atomicNumber, energy_eV):
+#     configurationFilepath = get_current_module_path(__file__, "../EnergyLossTools.cfg")
+#     filepath = Files.getDataPath(configurationFilepath, os.path.join("Casino3", "int", "numlist.dat"))
+#     seData = SecondaryElectronData.SecondaryElectronData(filepath)
+#
+#     J_eV = ElementProperties.getMeanIonizationEnergy_eV(atomicNumber)
+#     workFunction_eV = seData.getWorkFunction_eV(atomicNumber)
+#     k = ElementProperties.getKRatioCorrectionMonsel(atomicNumber, workFunction_eV*1.0e-3)
+#     Z_A = atomicNumber/ElementProperties.getAtomicMass_g_mol(atomicNumber)
+#
+#     rho_g_cm3 = ElementProperties.getMassDensity_g_cm3(atomicNumber)
+#
+#     B = np.log(1.166 * (energy_eV + k*J_eV)/J_eV) * Z_A
+#
+#     dEds_eV_nm = -7.85 * rho_g_cm3 * B / (energy_eV*1.0e-3)
+#
+#     if energy_eV*1.0e-3 < (workFunction_eV*1.0e-3 + 1.0 - 10.0):
+#         dEds_eV_nm = 0.0
+#
+#     if dEds_eV_nm > 0.0:
+#         dEds_eV_nm = 0.0
+#
+#     residualEnergyLoss_eV = 0.0004e-3
+#     return dEds_eV_nm - residualEnergyLoss_eV
 
 def reimer2008BetheRelativistic_eV_nm(atomicNumber, energy_eV):
     """
@@ -185,6 +183,7 @@ def dEdsTurner1978(atomicNumber, energy_eV):
     return 0.0
 
 def run():
+    from pyHendrixDemersTools import Graphics
     Graphics.setDefaultDisplay()
 
     atomicNumber = 29
@@ -250,6 +249,7 @@ def run():
     plt.show()
 
 def runCasino():
+    from pyHendrixDemersTools import Graphics
     Graphics.setDefaultDisplay()
 
     atomicNumber = 29
@@ -307,6 +307,7 @@ def runCasino():
     plt.show()
 
 def runCRDGauvinBruker():
+    from pyHendrixDemersTools import Graphics
     Graphics.setDefaultDisplay()
 
     atomicNumber = 29

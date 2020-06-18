@@ -13,7 +13,7 @@ import unittest
 import math
 
 # Third party modules.
-from nose import SkipTest
+import pytest
 
 # Local modules.
 
@@ -328,11 +328,11 @@ class TestDirectionCosine(unittest.TestCase):
 
         #self.fail("Test if the testcase is working.")
 
+    @pytest.mark.skip("Not implemented")
     def test_DirectionCosineSoum(self):
         """
         Tests for method `DirectionCosineSoum`.
         """
-        raise SkipTest
 
         lastDirection = (0, 0, 1)
         theta_rad = 0.0
@@ -476,11 +476,11 @@ class TestDirectionCosine(unittest.TestCase):
 
         self.fail("Test if the testcase is working.")
 
+    @pytest.mark.skip("Not implemented")
     def test_DirectionCosineDrouin(self):
         """
         Tests for method `DirectionCosineDrouin`.
         """
-        raise SkipTest
 
         lastDirection = (0, 0, 1)
         theta_rad = 0.0

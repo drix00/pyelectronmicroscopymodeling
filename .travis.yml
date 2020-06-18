@@ -1,51 +1,43 @@
 # Config file for automatic testing at travis-ci.org
 # This file will be regenerated if you run travis_pypi_setup.py
 
-# This reportedly works around an issue downloading packages from pypi on
-# travis.  Consider removing this after the underlying issue is fixed.
-# https://github.com/travis-ci/travis-ci/issues/2389
-sudo: false
+dist: bionic
 
 language: python
+cache: pip
 python:
-  - 3.3
-  - 3.4
-  - 3.5
-  - 3.6
-  # PyPy versions
-  - "pypy3"
+  - '3.6'
+  - '3.7'
+  - '3.8'
+
+matrix:
+  include:
+    - python: 3.5
+      dist: xenial
+
+before_install:
+  - python --version
+  - pip install --upgrade pip
+  - pip install --upgrade pytest
+  - pip install --upgrade coveralls
 
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
   - pip install -r requirements.txt
-  - pip install .
+  - pip install --upgrade -e .
 
 # command to run tests, e.g. python setup.py test
 script:
-  - nosetests
+  - pytest --cov=pyemm --cov=tests --cov-branch --cov-report xml
 
 after_success:
   - codecov
+  - coveralls
 
 notifications:
-  email: false
+  email:
+    on_success: never
+    on_failure: always
 
 git:
   lfs_skip_smudge: true
-
-# After you create the Github repo and add it to Travis, run the
-# travis_pypi_setup.py script to finish PyPI deployment setup
-deploy:
-  provider: pypi
-  distributions: sdist bdist_wheel
-  user: drix00
-  password:
-    secure: PLEASE_REPLACE_ME
-  on:
-    tags: true
-    repo: drix00/pyemm
-      - 3.3
-      - 3.4
-      - 3.5
-      - 3.6
-    condition: $TOXENV == py36

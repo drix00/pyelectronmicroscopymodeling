@@ -85,8 +85,9 @@ requirements = [
 ]
 
 test_requirements = [
-    "nose",
-    "coverage"
+    "pytest",
+    "coverage",
+    "pytest-cov"
 ]
 
 description = "Python code for electron microscopy modeling"
@@ -127,7 +128,7 @@ setup(name="pyEMM",
           ],
 
       cmdclass={'zip_testdata': TestDataCommand},
-      test_suite='nose.collector',
+      test_suite='tests',
       tests_require=test_requirements
 )
 

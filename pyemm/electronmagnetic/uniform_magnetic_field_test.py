@@ -19,7 +19,7 @@ __license__ = "GPL 3"
 import unittest
 
 # Third party modules.
-from nose import SkipTest
+import pytest
 
 # Local modules.
 
@@ -55,11 +55,11 @@ class Testuniform_magnetic_field(unittest.TestCase):
         #self.fail("Test if the testcase is working.")
         self.assert_(True)
 
+    @pytest.mark.skip("Not implemented")
     def test_velocity_nm_s(self):
         """
         Test compute_velocity_nm_s method.
         """
-        raise SkipTest
 
         velocityRefs_m_s = {100: 1.644, 120: 1.759, 200: 2.086, 300: 2.330, 400: 2.484, 1000: 2.823}
 
@@ -92,11 +92,3 @@ class Testuniform_magnetic_field(unittest.TestCase):
             self.assertAlmostEqual(velocityRef_m_s, velocity_m_s, 4)
 
         #self.fail("Test if the testcase is working.")
-
-if __name__ == '__main__':  #pragma: no cover
-    import nose
-    import sys
-    argv = sys.argv
-    argv.append("--with-coverage")
-    argv.append("--cover-package=pyemm.electronmagnetic.uniform_magnetic_field")
-    nose.runmodule(argv=argv)
