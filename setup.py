@@ -129,6 +129,9 @@ setup(name="pyEMM",
 
       cmdclass={'zip_testdata': TestDataCommand},
       test_suite='tests',
-      tests_require=test_requirements
+      tests_require=test_requirements,
+      extras_require={
+          'testing': ['pytest', 'coverage', 'pytest-cov'],
+          'develop': ['setuptools', 'Sphinx', 'sphinx-rtd-theme', 'pytest', 'coverage', 'pytest-cov']
+      },
 )
-
